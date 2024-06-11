@@ -1,0 +1,9 @@
+# Commands to start on workspace startup
+tasks:
+  - command: |
+      docker-compose up -d --build
+
+# Ports to expose on workspace startup
+ports:
+  - port: 8000
+    # onOpen: open-browser
