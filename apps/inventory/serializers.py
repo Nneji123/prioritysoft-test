@@ -7,6 +7,9 @@ class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
         fields = "__all__"
+        extra_kwargs = {
+            'date_added': {'read_only': True}
+        }
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -15,6 +18,9 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = "__all__"
+        extra_kwargs = {
+            'date_added': {'read_only': True}
+        }
 
 
 class BaseResponseSerializer(serializers.Serializer):
