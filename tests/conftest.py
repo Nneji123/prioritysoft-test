@@ -1,14 +1,15 @@
-from __future__ import absolute_import
 import sys
 import os
 
+pytest_plugins = ('celery.contrib.pytest', )
 
+@pytest.fixture(scope='session')
+def celery_config():
+    return {
+        'broker_url': 'redis://localhost:6379',
+        'result_backend': 'redis://localhost:6379'
+    }
 
-# This will make sure the app is always imported when
-# Django starts so that shared_task will use this app.
-from ..store.celery import app as celery_app
-
-__all__ = ("celery_app",)
 
 # Add the apps directory to the Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "apps"))
