@@ -1,5 +1,5 @@
 # Priority Store
-
+| | |
 | --- | --- |
 | CI/CD | [![CI - Test](https://github.com/Nneji123/ycombinator-scraper/actions/workflows/tests.yml/badge.svg)](https://github.com/Nneji123/ycombinator-scraper/actions/workflows/tests.yml)  [![Coverage](https://codecov.io/gh/Nneji123/ycombinator-scraper/graph/badge.svg?token=37muKJo0SL)](https://codecov.io/gh/Nneji123/ycombinator-scraper)|
 | Package | [![PyPI - Version](https://img.shields.io/pypi/v/ycombinator-scraper.svg?logo=pypi&label=PyPI&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/ycombinator-scraper.svg?color=blue&label=Downloads&logo=pypi&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ycombinator-scraper.svg?logo=python&label=Python&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) |
