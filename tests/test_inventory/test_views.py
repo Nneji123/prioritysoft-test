@@ -1,15 +1,18 @@
 import pytest
 from rest_framework.test import APIClient
+from django.contrib.auth import get_user_model
 from rest_framework import status
 from .models import Item, Supplier
 
+User = get_user_model()
+
 @pytest.fixture
 def admin_user(db):
-    return User.objects.create_user(username='admin', password='password', is_staff=True, is_superuser=True)
+    return User.objects.create_user(email='admin@example.com', password='password123', is_staff=True, is_superuser=True, is_admin=True)
 
 @pytest.fixture
 def normal_user(db):
-    return User.objects.create_user(username='user', password='password')
+    return User.objects.create_user(email='user@example.com', password='password123', is_employee=True)
 
 @pytest.fixture
 def api_client():
