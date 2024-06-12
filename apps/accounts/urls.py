@@ -16,17 +16,17 @@ urlpatterns = [
     path(
         "auth/password/change/",
         CustomPasswordChangeView.as_view(),
-        name="custom_password_change",
+        name="password_change",
     ),
     path(
         "auth/password/reset/confirm/",
         CustomPasswordResetConfirmView.as_view(),
-        name="custom_password_reset_confirm",
+        name="password_reset_confirm",
     ),
     path(
         "auth/password/reset/",
         CustomPasswordResetView.as_view(),
-        name="custom_password_reset",
+        name="password_reset",
     ),
 ]
 
