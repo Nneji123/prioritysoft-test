@@ -33,10 +33,10 @@ login_schema = extend_schema_view(
                             "responseCode": 200,
                             "message": "Login Successful",
                             "data": {
-                                "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3OTQzODg2LCJpYXQiOjE3MTc5MDc4ODYsImp0aSI6IjczZmNhZmNlOTY0YzQ3MDdiZTEyNDQxMmI4MGNlZGVlIiwidXNlcl9pZCI6InVzZXJpZF8wMHBtbjhidmp6N21lOHlxIn0.KpTb5vZ0-DhrrNAbQqEWH0n-4feKVFGbMI7LSiBaHWs",
-                                "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxNzk5NDI4NiwiaWF0IjoxNzE3OTA3ODg2LCJqdGkiOiIwNTU3Y2EzMGU0MTU0MjljYjg3ODdkN2E4MmM3ZTUwMyIsInVzZXJfaWQiOiJ1c2VyaWRfMDBwbW44YnZqejdtZTh5cSJ9.IHmX2YihzPoIFtkuVx0czWs0ekgbq6LShcc8VEBsbLY",
+                                "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                                "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
                                 "user": {
-                                    "pk": "userid_00pmn8bvjz7me8yq",
+                                    "pk": "1",
                                     "email": "ifeanyinneji777@gmail.com",
                                     "first_name": "",
                                     "last_name": "",
