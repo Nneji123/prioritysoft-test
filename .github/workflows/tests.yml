@@ -47,6 +47,6 @@ jobs:
         run: |
           DJANGO_SETTINGS_MODULE=store.settings.development pytest tests  
         env:
-          REDIS_URL: localhost://redis:6379/0
+          REDIS_URL: redis://localhost:6379/0
           POSTGRES_URI: postgresql://myuser:mypassword@localhost:5432/database
           ENVIRONMENT: Dev
