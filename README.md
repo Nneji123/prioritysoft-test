@@ -1,10 +1,9 @@
 # Priority Store
-| | |
+| Category | Badges |
 | --- | --- |
-| CI/CD | [![tests](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml/badge.svg)](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/Nneji123/prioritysoft-test/graph/badge.svg?token=PmwZ7zM9xC)](https://codecov.io/gh/Nneji123/prioritysoft-test) ![Docker](https://img.shields.io/badge/Docker-blue?style=flat&logo=docker&logoColor=white)|
-| Package | [![PyPI - Version](https://img.shields.io/pypi/v/ycombinator-scraper.svg?logo=pypi&label=PyPI&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/ycombinator-scraper.svg?color=blue&label=Downloads&logo=pypi&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ycombinator-scraper.svg?logo=python&label=Python&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) |
-| Meta |  [![Language](https://img.shields.io/badge/Python-darkblue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![Framework](https://img.shields.io/badge/Flask-darkgreen.svg?style=flat&logo=flask&logoColor=white)](https://github.com/Nneji123/Raplyricsbot) ![reposize](https://img.shields.io/github/repo-size/Nneji123/prioritysoft-test)[![License - MIT](https://img.shields.io/badge/license-MIT-9400d3.svg)](./LICENSE) |
+| CI/CD | [![tests](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml/badge.svg)](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/Nneji123/prioritysoft-test/graph/badge.svg?token=PmwZ7zM9xC)](https://codecov.io/gh/Nneji123/prioritysoft-test) ![Docker](https://img.shields.io/badge/Docker-blue?style=flat&logo=docker&logoColor=white) |
+| Meta | [![Language](https://img.shields.io/badge/Python-3.8-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org) [![Framework](https://img.shields.io/badge/Django-darkgreen.svg?style=flat&logo=django&logoColor=white)](https://www.djangoproject.com/) ![reposize](https://img.shields.io/github/repo-size/Nneji123/prioritysoft-test) [![License - MIT](https://img.shields.io/badge/license-MIT-9400d3.svg)](./LICENSE) |
+
 
 Priority Store is a Django Rest Framework project designed to manage the inventory of items and suppliers efficiently. This project includes various features such as a custom user model, Celery for task handling, Docker for containerization, and more. This documentation provides an extensive overview of the project's structure, setup, and usage.
 
@@ -266,19 +265,18 @@ This project includes extensive API documentation generated with drf-spectacular
 - Swagger UI: `/swagger/`
 - Redoc: `/docs/`
 
-### Adding Images
+### Swagger and Redoc UI
 
-![Swagger UI](./github/images/Screenshot (694).png)
-![Swagger UI2](./github/images/Screenshot (695).png)
+![Swagger UI](.github/images/Screenshot%20(694).png)
+![Swagger UI2](.github/images/Screenshot%20(695).png)
 
-![Redoc UI]("./github/images/Screenshot (698).png")
-![Redoc UI]("./github/images/Screenshot (699).png")
+![Redoc UI](.github/images/Screenshot%20(698).png)
+![Redoc UI](.github/images/Screenshot%20(699).png)
 
 ## Mailpit UI
 
-![Mailpit UI]("./github/images/Screenshot (696).png")
-
-![Mailpit UI]("./github/images/Screenshot (697).png")
+![Mailpit UI](.github/images/Screenshot%20(696).png)
+![Mailpit UI](.github/images/Screenshot%20(697).png)
 
 ## Custom Admin Interface
 
