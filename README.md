@@ -48,6 +48,40 @@ priority-store/
 └── requirements.txt
 ```
 
+## Apps Overview
+
+### Core
+
+The **Core** app contains essential functions and utilities that are shared across the project. These include:
+
+- **Middlewares**: Custom middlewares for request processing.
+- **Templates**: Base templates for rendering views.
+- **Management Commands**: Custom Django management commands for various administrative tasks.
+
+### Accounts
+
+The **Accounts** app manages user-related functionality, including:
+
+- **Admins**: Users with full access to the system.
+- **Employees**: Users who can perform operations on items but can only view supplier information without modification rights.
+- **Models**: Defines user roles and permissions.
+- **Views**: Manages the API endpoints for user operations.
+- **Serializers**: Transforms user data for API responses.
+- **Permissions**: Defines access control logic for different user roles.
+
+### Inventory
+
+The **Inventory** app handles the management of items and suppliers:
+
+- **Items**: Products that can have multiple suppliers.
+- **Suppliers**: Entities that provide items.
+- **Models**: Defines the schema for items and suppliers.
+- **Views**: Manages the API endpoints for inventory operations.
+- **Serializers**: Transforms inventory data for API responses.
+- **Permissions**: Defines access control logic for item and supplier operations.
+
+
+
 ## Getting Started
 
 ### Prerequisites
