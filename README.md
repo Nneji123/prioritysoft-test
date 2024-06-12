@@ -267,7 +267,7 @@ This project includes extensive API documentation generated with drf-spectacular
 - Swagger UI: `/swagger/`
 - Redoc: `/docs/`
 
-### Adding Images
+### UI Screenshots
 
 <details>
 <summary>Swagger UI</summary>
