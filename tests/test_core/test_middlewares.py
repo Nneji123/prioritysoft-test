@@ -1,6 +1,6 @@
 import pytest
 from django.test import RequestFactory
-from my_module.middleware import DisableCSRFMiddleware
+from core.middlewares import DisableCSRFMiddleware
 
 @pytest.fixture
 def request_factory():
