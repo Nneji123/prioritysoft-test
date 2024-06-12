@@ -2,7 +2,7 @@ import pytest
 from rest_framework.test import APIClient
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from ....apps.inventory.models import Item, Supplier
+from ...apps.inventory.models import Item, Supplier
 
 User = get_user_model()
 
