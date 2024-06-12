@@ -40,13 +40,13 @@ jobs:
       - name: Copy .env.sample (if it exists) and add to secrets
         run: |
           if [ -f ".env.sample" ]; then
-            cp .env.sample .env
+            cp .github/workflows/.env.tests .env
             echo ".env" >> .gitignore
           fi
       - name: Run Tests
         run: |
           DJANGO_SETTINGS_MODULE=store.settings.development pytest tests  
         env:
-          REDIS_URI: redis://redis:6379/0
-          POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
+          REDIS_URL: localhost://redis:6379/0
+          POSTGRES_URI: postgresql://myuser:mypassword@localhost:5432/database
           ENVIRONMENT: Dev
