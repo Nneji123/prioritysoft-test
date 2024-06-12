@@ -14,7 +14,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: mypassword
           POSTGRES_USERNAME: myuser
-          POSTGRES_DATABASE_NAME: database
+          POSTGRES_DB: database
           
         ports:
           - "5432:5432"
