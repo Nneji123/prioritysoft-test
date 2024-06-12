@@ -10,16 +10,16 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path(f"{settings.ADMIN_URL_PATH}/", admin.site.urls),
-    path("api/v1/", include("inventory.urls")),
-    path("api/v1/auth/", include("accounts.urls")),
-    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("", include("inventory.urls")),
+    path("auth/", include("accounts.urls")),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
-        "api/v1/swagger/",
+        "swagger/",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger",
     ),
     path(
-        "api/v1/docs/",
+        "docs/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="docs",
     ),
