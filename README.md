@@ -1,9 +1,10 @@
 # Priority Store
 | | |
 | --- | --- |
-| CI/CD | [![tests](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml/badge.svg)](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/Nneji123/prioritysoft-test/graph/badge.svg?token=PmwZ7zM9xC)](https://codecov.io/gh/Nneji123/prioritysoft-test)|
+| CI/CD | [![tests](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml/badge.svg)](https://github.com/Nneji123/prioritysoft-test/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/Nneji123/prioritysoft-test/graph/badge.svg?token=PmwZ7zM9xC)](https://codecov.io/gh/Nneji123/prioritysoft-test) ![Docker](https://img.shields.io/badge/Docker-blue?style=flat&logo=docker&logoColor=white)|
 | Package | [![PyPI - Version](https://img.shields.io/pypi/v/ycombinator-scraper.svg?logo=pypi&label=PyPI&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/ycombinator-scraper.svg?color=blue&label=Downloads&logo=pypi&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ycombinator-scraper.svg?logo=python&label=Python&logoColor=gold)](https://pypi.org/project/ycombinator-scraper/) |
-| Meta |  [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) [![License - MIT](https://img.shields.io/badge/license-MIT-9400d3.svg)](./LICENSE) |
+| Meta |  [![Language](https://img.shields.io/badge/Python-darkblue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![Framework](https://img.shields.io/badge/Flask-darkgreen.svg?style=flat&logo=flask&logoColor=white)](https://github.com/Nneji123/Raplyricsbot) ![reposize](https://img.shields.io/github/repo-size/Nneji123/prioritysoft-test)[![License - MIT](https://img.shields.io/badge/license-MIT-9400d3.svg)](./LICENSE) |
 
 Priority Store is a Django Rest Framework project designed to manage the inventory of items and suppliers efficiently. This project includes various features such as a custom user model, Celery for task handling, Docker for containerization, and more. This documentation provides an extensive overview of the project's structure, setup, and usage.
 
@@ -26,31 +27,88 @@ Priority Store is a Django Rest Framework project designed to manage the invento
 ## Project Structure
 
 ```
-priority-store/
-├── apps/
-│   ├── inventory/
-│   ├── core/
-│   └── accounts/
-├── store/
-│   ├── settings/
-│   │   ├── base.py
-│   │   ├── development.py
-│   │   └── production.py
-│   ├── urls.py
-│   └── wsgi.py
-├── data/
-│   ├── *.pem # These files are required for Mailpit 
-├── tests/
-│   ├── __init__.py
-│   ├── test_inventory.py
-│   ├── test_suppliers.py
-│   └── test_users.py
-├── Dockerfile
-├── compose.yml
+prioritysoft-test/
+.
+├── LICENSE
 ├── Makefile
-├── manage.py
 ├── README.md
-└── requirements.txt
+├── apps
+│   ├── __init__.py
+│   ├── accounts
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── managers.py
+│   │   ├── migrations
+│   │   ├── mixins.py
+│   │   ├── models.py
+│   │   ├── schema.py
+│   │   ├── serializers.py
+│   │   ├── tasks.py
+│   │   ├── templates
+│   │   ├── throttles.py
+│   │   ├── urls.py
+│   │   ├── utils.py
+│   │   └── views.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── apps.py
+│   │   ├── management
+│   │   ├── middlewares.py
+│   │   ├── migrations
+│   │   ├── templates
+│   │   └── utils.py
+│   └── inventory
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── migrations
+│       ├── models.py
+│       ├── pagination.py
+│       ├── permissions.py
+│       ├── schema.py
+│       ├── serializers.py
+│       ├── signals.py
+│       ├── tasks.py
+│       ├── templates
+│       ├── urls.py
+│       ├── utils.py
+│       └── views.py
+├── compose.yml
+├── data
+│   ├── cert.pem
+│   ├── csr.pem
+│   ├── key.pem
+├── docker
+│   ├── Dockerfile.dev
+│   ├── Dockerfile.prod
+│   ├── requirements.development.txt
+│   └── requirements.production.txt
+├── docs
+│   └── code_samples
+│       └── accounts
+├── manage.py
+├── requirements.txt
+├── scripts
+│   ├── deploy.sh
+│   └── entrypoint.sh
+├── store
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── celery.py
+│   ├── settings
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── development.py
+│   │   └── production.py
+│   ├── urls.py
+│   └── wsgi.py
+├── tests
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── test_accounts
+│   ├── test_core
+│   └── test_inventory
 ```
 
 ## Apps Overview
@@ -94,15 +152,15 @@ The **Inventory** app handles the management of items and suppliers:
 - Docker
 - Docker Compose
 - Git
-- Python 3.8+ 
+- Python 3.8+
 
 ### Setup
 
 #### Clone the Repository
 
 ```sh
-git clone https://github.com/nneji123/priority-store.git
-cd priority-store
+git clone https://github.com/nneji123/prioritysoft-test.git
+cd prioritysoft-test
 ```
 
 #### Environment Variables
@@ -114,13 +172,16 @@ Create a `.env` file in the root directory and add the necessary environment var
 Build and run the containers:
 
 ```sh
-docker build -t my_image_name "path to file"
+docker build -t my_image_name /docker/Dockerfile.dev
+docker run -d --name my_container_name my_image_name
 ```
 
 For production:
 
 ```sh
-docker compose -f docker-compose.prod.yml up --build
+docker build -t my_image_name /docker/Dockerfile.prod
+docker run -d --name my_container_name my_image_name
+
 ```
 
 #### Using Docker Compose
@@ -129,12 +190,6 @@ Build and run the containers:
 
 ```sh
 docker compose up --build
-```
-
-For production:
-
-```sh
-docker compose -f docker-compose.prod.yml up --build
 ```
 
 #### Using Makefile
@@ -169,10 +224,10 @@ python manage.py runserver
 
 ### Running with Gitpod
 
-To run the project in Gitpod:
 
-1. Open the repository in Gitpod.
-2. Gitpod will automatically set up the environment and start the development server.
+You can use Gitpod, a free online VS Code-like environment, to quickly start contributing.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/nneji123/prioritysoft-test)
 
 ### Running with CodeSpaces
 
@@ -186,38 +241,44 @@ To run the project in GitHub Codespaces:
 To run the tests:
 
 ```sh
-pytest tests
+pip install pytest pytest-mock pytest-celery pytest-cov pytest-django
+DJANGO_SETTINGS_MODULE=store.settings.development pytest --cov=apps tests --cov-report=xml
 ```
 
 Coverage reports will be generated by Codecov.
 
-## Pre-commit Hooks
+### Setting Up Pre-Commit Hooks
 
-Ensure your code meets quality standards by setting up pre-commit hooks:
+We use `pre-commit` to ensure code quality. Install it by running:
 
-```sh
+```bash
 pip install pre-commit
 pre-commit install
 ```
+
+Now, `pre-commit` will run automatically before each commit to check for linting and other issues.
+
 
 ## OpenAPI Documentation
 
 This project includes extensive API documentation generated with drf-spectacular. You can access the Swagger UI and Redoc documentation at the following endpoints:
 
 - Swagger UI: `/swagger/`
-- Redoc: `/redoc/`
+- Redoc: `/docs/`
 
 ### Adding Images
 
-![Swagger UI](path_to_swagger_image)
+![Swagger UI](./github/images/Screenshot (694).png)
+![Swagger UI2](./github/images/Screenshot (695).png)
 
-![Redoc UI](path_to_redoc_image)
+![Redoc UI]("./github/images/Screenshot (698).png")
+![Redoc UI]("./github/images/Screenshot (699).png")
 
 ## Mailpit UI
 
-![Mailpit UI](path_to_mailpit_image1)
+![Mailpit UI]("./github/images/Screenshot (696).png")
 
-![Mailpit UI](path_to_mailpit_image2)
+![Mailpit UI]("./github/images/Screenshot (697).png")
 
 ## Custom Admin Interface
 
@@ -243,27 +304,35 @@ Redis is used as a message broker for Celery tasks. It is also configured in the
 
 ### Mailpit
 
-Mailpit is used for email testing. The `.pen` files required for Mailpit to start are located in the `data` directory.
+Mailpit is used for email testing. The `.pem` files required for Mailpit to start are located in the `data` directory.
 
 ## Contributing
 
 Contributions are welcome! Please follow the guidelines below:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Make your changes.
-4. Ensure all tests pass.
-5. Submit a pull request.
+### Submitting a Pull Request
+
+1. Fork the repository and create a new branch for your contribution:
+
+    ```bash
+    git checkout -b feature-or-fix-branch
+    ```
+
+2. Make your changes, run tests and commit them:
+
+    ```bash
+    git add .
+    git commit -am "Your meaningful commit message"
+    ```
+
+3. Push the changes to your fork:
+
+    ```bash
+    git push origin feature-or-fix-branch
+    ```
+
+4. Open a pull request on GitHub. Provide a clear title and description of your changes.
 
 ## License
 
 This project is licensed under the MIT License.
-
----
-
-
-# TODO:
-- Add Logging Statements
-- Update Documentation 
-- Record Video
-- Add tests
