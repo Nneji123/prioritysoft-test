@@ -40,8 +40,19 @@ def test_item_supplier_relationship():
         price=9.99
     )
     item.suppliers.add(supplier)
+
+    # Read test
     assert supplier in item.suppliers.all()
     assert item in supplier.items.all()
+
+    # Update test (modify supplier details)
+    supplier.name = "Updated Supplier"
+    supplier.save()
+    assert Supplier.objects.get(pk=supplier.pk).name == "Updated Supplier"
+
+    # Delete test (remove supplier)
+    supplier.delete()
+    assert Supplier.objects.filter(pk=supplier.pk).count() == 0
 
 @pytest.mark.django_db
 def test_supplier_str():
@@ -60,4 +71,4 @@ def test_item_str():
         price=9.99
     )
     assert str(item) == "Test Item"
-      
+    
