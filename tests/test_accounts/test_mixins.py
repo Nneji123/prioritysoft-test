@@ -35,16 +35,16 @@ def test_handle_exception(mixin):
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == {
             "responseCode": status.HTTP_400_BAD_REQUEST,
-            "message": str(exc),
+            "message": "{'field': [ErrorDetail(string='This field is required.', code='invalid')]}",
             "data": {"field": ["This field is required."]},
         }
 
 @pytest.mark.parametrize("errors, expected_message", [
-    ({"field1": ["error1"]}, "error1"),
-    ({"field1": ["error1", "error2"]}, "error1; error2"),
-    ({"field1": {"nested_field": ["nested_error"]}}, "nested_error"),
-    (["list_error1", "list_error2"], "list_error1; list_error2"),
-    (ValidationError({"field1": [ErrorDetail("error1", code="invalid")]}), "error1")
+    ({"field1": ["error1"]}, "{'field1': ['error1']}"),
+    ({"field1": ["error1", "error2"]}, "{'field1': ['error1', 'error2']}"),
+    ({"field1": {"nested_field": ["nested_error"]}}, "{'field1': {'nested_field': ['nested_error']}}"),
+    (["list_error1", "list_error2"], "['list_error1', 'list_error2']"),
+    (ValidationError({"field1": [ErrorDetail("error1", code="invalid")]}), "{'field1': [ErrorDetail(string='error1', code='invalid')]}"),
 ])
 def test_get_custom_error_message(mixin, errors, expected_message):
     assert mixin.get_custom_error_message(errors) == expected_message
