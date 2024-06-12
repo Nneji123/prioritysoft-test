@@ -9,21 +9,24 @@
 
 Priority Store is a Django Rest Framework project designed to manage the inventory of items and suppliers efficiently. This project includes various features such as a custom user model, Celery for task handling, Docker for containerization, and more. This documentation provides an extensive overview of the project's structure, setup, and usage.
 
-## Features
+**Features**
 
-- **Custom User Model**: A tailored user model to meet specific authentication needs.
-- **Celery**: Handles asynchronous tasks such as password reset emails and supplier notification emails.
-- **Pre-commit Hooks**: Configured with `black` and `isort` to ensure code quality and consistency.
-- **Makefile**: Simplifies common tasks and commands.
-- **Docker Compose**: Supports multiple environments (production and development).
-- **Separated Settings**: Different settings for development and production environments.
-- **Automated Tests**: Uses GitHub Actions, `pytest`, and `codecov` for continuous integration and code coverage.
-- **Modular Apps Structure**: Enhances code modularity and maintainability.
-- **OpenAPI Documentation**: Provides extensive API documentation using Swagger and Redoc with drf-spectacular.
-- **Custom Admin Interface**: Utilizes Django admin interface package for a customized admin experience.
-- **Staticfiles Hosting**: Uses Whitenoise for serving static files.
-- **Postgres and Redis Services**: Facilitates easy setup with Docker.
-- **Mailpit**: Email testing functionality with visual representation of Mailpit UI.
+- **Custom User Model:** A tailored user model to meet specific authentication needs.
+- **Celery:** Handles asynchronous tasks such as password reset emails and supplier notification emails.
+- **Rate Throttling:** Implements rate limiting to control the number of requests a user can make, enhancing security and preventing abuse.
+- **Pagination:** Provides efficient data retrieval and user-friendly navigation by breaking down large datasets into manageable chunks.
+- **Use of Django Signals:** Triggers supplier notifications through Django signals, ensuring real-time updates and streamlined communication.
+- **Pre-commit Hooks:** Configured with black and isort to ensure code quality and consistency.
+- **Makefile:** Simplifies common tasks and commands.
+- **Docker Compose:** Supports multiple environments (production and development).
+- **Separated Settings:** Different settings for development and production environments.
+- **Automated Tests:** Uses GitHub Actions, pytest, and codecov for continuous integration and code coverage.
+- **Modular Apps Structure:** Enhances code modularity and maintainability.
+- **OpenAPI Documentation:** Provides extensive API documentation using Swagger and Redoc with drf-spectacular.
+- **Custom Admin Interface:** Utilizes Django admin interface package for a customized admin experience.
+- **Staticfiles Hosting:** Uses Whitenoise for serving static files.
+- **Postgres and Redis Services:** Facilitates easy setup with Docker.
+- **Mailpit:** Email testing functionality with visual representation of Mailpit UI.
 
 ## Project Structure
 
