@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from datetime import datetime
-from apps.inventory.models import Supplier
-from apps.inventory.tasks import send_new_supplier_notification
+from inventory.models import Supplier
+from inventory.tasks import send_new_supplier_notification
 
 
 @pytest.fixture
