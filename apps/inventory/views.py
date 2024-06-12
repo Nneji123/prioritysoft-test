@@ -63,7 +63,7 @@ class ItemViewSet(viewsets.ModelViewSet):
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly]
     pagination_class = CustomPagination
     filter_backends = [
         DjangoFilterBackend,

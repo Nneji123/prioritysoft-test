@@ -12,7 +12,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("auth/login/", CustomLoginView.as_view(), name="user_login"),
+    path("auth/login/", CustomLoginView.as_view(), name="login"),
     path(
         "auth/password/change/",
         CustomPasswordChangeView.as_view(),

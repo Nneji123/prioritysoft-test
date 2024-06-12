@@ -13,6 +13,7 @@ staticfiles/
 .Python
 build/
 develop-eggs/
+bin/
 dist/
 downloads/
 eggs/
