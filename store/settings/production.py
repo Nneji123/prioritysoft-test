@@ -47,8 +47,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
 ]
 
-# CORS_ALLOW_ALL_ORIGINS: True
-
 DATABASES = {
     "default": dj_database_url.config(default=os.environ.get("POSTGRES_URI")),
 }
