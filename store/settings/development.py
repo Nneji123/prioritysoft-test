@@ -10,7 +10,19 @@ INSTALLED_APPS = INSTALLED_APPS + [
     "debug_toolbar",
 ]
 
-# TODO: Add Middleware
+MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "core.middlewares.DisableCSRFMiddleware",  
+"request_logging.middleware.LoggingMiddleware",
+       "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
 
 SECRET_KEY = os.environ.get("DEV_SECRET_KEY")
 
