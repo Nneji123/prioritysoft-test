@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv pip install --system --no-cache pytest pytest-mock pytest-celery pytest-django
+          uv pip install --system --no-cache pytest pytest-mock pytest-celery pytest-cov pytest-django
           uv pip install --system --no-cache -r requirements.txt
       - name: Copy .env.sample (if it exists) and add to secrets
         run: |
