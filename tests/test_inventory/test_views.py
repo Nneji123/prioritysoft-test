@@ -6,6 +6,9 @@ from inventory.models import Item, Supplier
 
 User = get_user_model()
 
+def test_celery_worker_initializes(celery_app, celery_worker):
+    assert True
+
 @pytest.fixture
 def admin_user(db):
     return User.objects.create_user(email='admin@example.com', password='password123', is_staff=True, is_superuser=True, is_admin=True)
