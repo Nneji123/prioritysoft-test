@@ -15,7 +15,7 @@ def mock_send_mail(mocker):
 @pytest.mark.django_db
 def test_send_new_supplier_notification(celery_worker, mock_send_mail):
     User = get_user_model()
-    user = User.objects.create_user(username='testuser', email='testuser@example.com', password='password', is_active=True)
+    user = User.objects.create_user(email='testuser@example.com', password='password123', is_active=True)
     supplier = Supplier.objects.create(
         name="Test Supplier",
         email_address="test@supplier.com",
