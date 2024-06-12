@@ -1,7 +1,7 @@
 import pytest
 from django.db import IntegrityError
 from datetime import date
-from apps.inventory.models import Supplier, Item
+from inventory.models import Supplier, Item
 
 @pytest.mark.django_db
 def test_supplier_creation():
