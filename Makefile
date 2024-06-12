@@ -2,7 +2,7 @@
 
 # Variables
 PYTHON = python
-PIP = $(PYTHON) -m pip
+PIP = $(PYTHON) -m  pip
 MANAGE = $(PYTHON) manage.py
 
 # Default target
@@ -38,8 +38,9 @@ runserver:
 
 # Run tests
 test:
-	$(MANAGE) test
+	pytest test --cov=apps --cov-report=xml
 
 # Run linting checks
 lint:
-	flake8 .
+	black .
+ isort .
