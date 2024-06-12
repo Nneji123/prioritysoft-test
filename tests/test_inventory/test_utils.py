@@ -1,6 +1,6 @@
 import pytest
 from rest_framework.response import Response
-from apps.inventory.utils import format_response
+from inventory.utils import format_response
 
 def test_format_response_with_data():
     response = format_response(200, "Success", {"key": "value"})
