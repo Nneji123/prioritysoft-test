@@ -3,13 +3,13 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.dev
-    container_name: fundusai-api
+    container_name: prioritystore-api
     command: >
       sh -c "
-      if [ \"$${SERVER_MODE}\" != 'Prod' ]; then
+      if [ \"$${ENVIRONMENT}\" != 'Prod' ]; then
         python manage.py runserver 0.0.0.0:8000;
       else
-        gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --env DJANGO_CONFIGURATION=DevConfig;
+        gunicorn store.wsgi:application --bind 0.0.0.0:8000 --settings=store.settings.production;
       fi"
     ports:
       - 8000:8000
@@ -21,7 +21,7 @@ services:
     environment:
       REDIS_URI: redis://redis:6379/0
       POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
-      SERVER_MODE: ${SERVER_MODE}
+      ENVIRONMENT: ${ENVIRONMENT}
 
 
     env_file: .env
@@ -45,42 +45,18 @@ services:
     volumes:
       - postgres_data_13:/var/lib/postgresql/data/
 
-  celery-beat: # Celery beat for scheduled tasks
-    container_name: fundusai-api-celery-beat
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.dev
-    command: >
-      sh -c "
-      if [ \"$${SERVER_MODE}\" != "Prod" ]; then
-        watchmedo auto-restart --directory=/app --pattern=*.py --recursive -- celery -A backend beat -l info --logfile=logs/celery_beat.log
-      else
-        celery -A backend beat -l info --logfile=celery_beat.log
-      fi"
-    volumes:
-      - .:/app
-    depends_on:
-      redis:
-        condition: service_started
-      postgres:
-        condition: service_started
-    environment:
-      REDIS_URI: redis://redis:6379/0
-      POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
-      SERVER_MODE: ${SERVER_MODE}
-
   celery-worker: # Celery Worker
-    container_name: fundusai-api-celery-worker
+    container_name: prioritystore-api-celery-worker
 
     build:
       context: .
       dockerfile: docker/Dockerfile.dev
     command: >
       sh -c "
-      if [ \"$${SERVER_MODE}\" != "Prod" ]; then
-        watchmedo auto-restart --directory=/app --pattern=\*.py --recursive -- celery -A backend worker -l info --logfile=logs/celery_worker.log;
+      if [ \"$${ENVIRONMENT}\" != "Prod" ]; then
+        watchmedo auto-restart --directory=/app --pattern=\*.py --recursive -- celery -A store worker -l info --logfile=logs/celery_worker.log;
       else
-        celery -A backend worker -l info --logfile=celery_worker.log;
+        celery -A store worker -l info --logfile=celery_worker.log;
       fi"
     volumes:
       - .:/app
@@ -90,9 +66,9 @@ services:
       postgres:
         condition: service_started
     environment:
-      REDIS_URI: redis://redis:6379/0
+      DEV_REDIS_URL: redis://redis:6379/0
       POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
-      SERVER_MODE: ${SERVER_MODE}
+      ENVIRONMENT: ${ENVIRONMENT}
     env_file: .env
     restart: on-failure
 
@@ -102,7 +78,7 @@ services:
       dockerfile: docker/Dockerfile.dev
     ports:
       - 5555:5555
-    command: celery -A backend flower --port=5555
+    command: celery -A store flower --port=5555
     depends_on:
       redis:
         condition: service_started
@@ -123,7 +99,6 @@ services:
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATA_FILE: /data/mailpit.db
-      # MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_REQUIRE_STARTTLS: 0
       MP_SMTP_TLS_CERT: /data/cert.pem
       MP_SMTP_TLS_KEY: /data/key.pem

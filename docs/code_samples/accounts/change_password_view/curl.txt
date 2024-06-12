@@ -1,0 +1,10 @@
+curl -X 'POST' \
+  '{BASE_URL_HERE}/api/v1/auth/password/change/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer TOKEN_HERE' \
+  -H 'Content-Type: application/json' \
+  -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+  -d '{
+  "new_password1": "string",
+  "new_password2": "string"
+}'

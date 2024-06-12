@@ -15,3 +15,9 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = "__all__"
+
+
+class BaseResponseSerializer(serializers.Serializer):
+    responseCode = serializers.IntegerField()
+    message = serializers.CharField()
+    data = serializers.DictField()

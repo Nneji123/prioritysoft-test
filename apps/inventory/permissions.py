@@ -1,19 +1,13 @@
-from rest_framework.permissions import BasePermission
+from rest_framework import permissions
 
 
-class IsAdminUser(BasePermission):
+class IsAdminOrReadOnly(permissions.BasePermission):
     """
-    Allows access only to admin users.
-    """
-
-    def has_permission(self, request, view):
-        return bool(request.user and request.user.is_admin)
-
-
-class IsEmployeeUser(BasePermission):
-    """
-    Allows access only to employee users.
+    Custom permission to only allow admins to create, update, and delete suppliers.
+    Employees can only view.
     """
 
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_employee)
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user and request.user.is_admin

@@ -1,0 +1,18 @@
+import requests
+
+# Replace 'https://<your_base_url>' with your actual base URL
+base_url = "https://<your_base_url>"
+url = f"{base_url}/api/v1/auth/login/"
+
+headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+}
+
+data = {"email": "ifeanyinneji777@gmail.com", "password": "testpassword123"}
+
+response = requests.post(url, headers=headers, json=data)
+
+# Handle the response here
+print(response.text)

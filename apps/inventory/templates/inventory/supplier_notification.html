@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+New Supplier Created
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1>New Supplier Created</h1>
+        </div>
+        <div class="content">
+            <p>Hello,</p>
+            <p>A new supplier has been created:</p>
+            <ul>
+                <li><strong>Name:</strong> {{ supplier.name }}</li>
+                <li><strong>Email Address:</strong> {{ supplier.email_address }}</li>
+                <li><strong>Phone Number:</strong> {{ supplier.phone_number }}</li>
+                <li><strong>Date Added:</strong> {{ supplier.date_added }}</li>
+            </ul>
+            <p>Please log in to the admin panel for more details.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ year }} PriorityStore</p>
+        </div>
+    </div>
+{% endblock %}

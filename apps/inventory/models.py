@@ -1,9 +1,12 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Supplier(models.Model):
     name = models.CharField(max_length=255)
-    contact_info = models.TextField()
+    email_address = models.EmailField()
+    phone_number = PhoneNumberField(blank=True)
+    date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.name

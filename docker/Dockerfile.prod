@@ -1,0 +1,37 @@
+FROM python:3.8.13-slim-bullseye
+
+WORKDIR /app
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    netcat \
+    wget \
+    unzip \
+    postgresql-client \
+    dpkg && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade setuptools
+
+ADD --chmod=655 https://astral.sh/uv/install.sh /install.sh
+RUN /install.sh && rm /install.sh
+
+ADD docker/requirements.production.txt /app/requirements.txt
+
+RUN --mount=type=cache,target=/root/.cache/pip /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
+
+ADD . /app
+
+RUN sed -i "s/raise RuntimeError(\"populate() isn't reentrant\")/self.app_configs = {}/g" /usr/local/lib/python3.8/site-packages/django/apps/registry.py
+
+# Copy the entrypoint script
+COPY scripts/deploy.sh /app/scripts/deploy.sh
+RUN chmod +x /app/scripts/deploy.sh
+
+EXPOSE 8000
+
+ENTRYPOINT ["/app/scripts/deploy.sh"]

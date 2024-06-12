@@ -1,0 +1,11 @@
+// Replace 'https://<your_base_url>' with your actual base URL
+const baseUrl: string = "https://<your_base_url>";
+const url: string = `${baseUrl}/api/v1/auth/password/reset/confirm/`;
+
+const headers: { [key: string]: string } = {
+  "Accept": "application/json",
+  "Content-Type": "application/json",
+  "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+};
+
+const data: { email: string; code: number; new_password1: string; new_password2: string }

@@ -1,0 +1,9 @@
+curl -X 'POST' \
+  '{BASE_URL_HERE}/api/v1/auth/password/reset/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3OTQ1MTU4LCJpYXQiOjE3MTc5MDkxNTgsImp0aSI6ImMxNzBjOWJhMDFmYzQxMzA4NTJkY2VkM2U5M2NlYTY2IiwidXNlcl9pZCI6InVzZXJpZF8wMHBtbjhidmp6N21lOHlxIn0.udsMkMYyCDXEcMyR8vYjgdXPBTRWxSAwV6m7HtClKDA' \
+  -H 'Content-Type: application/json' \
+  -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+  -d '{
+  "email": "user@example.com"
+}'

@@ -6,7 +6,15 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "store.settings")
+    # Add the apps directory to the Python path
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "apps"))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "staticfiles"))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "static"))
+    environment = os.environ.get("ENVIRONMENT")
+    if environment == "Prod":
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "store.settings.production")
+    else:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "store.settings.development")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

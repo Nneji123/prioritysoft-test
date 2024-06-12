@@ -3,11 +3,8 @@
 set -e
 
 # Wait for the database to be ready if in production mode
-if [ "$SERVER_MODE" != "Prod" ]; then
-  echo "Skipping PostgreSQL check as SERVER_MODE is not set to Prod."
-  if [ ! -d "data/backup" ]; then
-    mkdir -p data/backup
-  fi
+if [ "$ENVIRONMENT" != "Prod" ]; then
+  echo "Skipping PostgreSQL check as ENVIRONMENT is not set to Prod."
   if [ ! -d "logs" ]; then
     mkdir -p logs
   fi
@@ -26,7 +23,7 @@ else
 fi
 
 # Make sure the migrations directories and __init__.py files exist
-for dir in userauth core forum gamification tracking edumaterials telehealth; do
+for dir in accounts core inventory; do
     mkdir -p apps/$dir/migrations && touch apps/$dir/migrations/__init__.py
 done
 
@@ -38,7 +35,7 @@ python manage.py migrate --run-syncdb
 python manage.py customcreatesuperuser
 
 # Collect static files
-python manage.py collectstatic --no-post-process --no-input --upload-unhashed-files
+python manage.py collectstatic --no-post-process --no-input
 
 # Execute the CMD
 exec "$@"

@@ -1,0 +1,29 @@
+// Replace 'https://<your_base_url>' with your actual base URL
+const baseUrl = "https://<your_base_url>";
+const url = `${baseUrl}/api/v1/auth/password/reset/`;
+
+// Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token (might not be required)
+const headers = {
+  "Accept": "application/json",
+  "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`,  # Might not be needed
+  "Content-Type": "application/json",
+  "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+};
+
+const data = {
+  email: "user@example.com",  # Replace with your actual email
+};
+
+fetch(url, {
+  method: 'POST',
+  headers: headers,
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  // Handle the response data here
+  console.log(data);
+})
+.catch(error => {
+  console.error(error);
+});

@@ -5,8 +5,8 @@
 set -e
 
 # Wait for the database to be ready if in production mode
-if [ "$SERVER_MODE" != "Prod" ]; then
-  echo "Skipping PostgreSQL check as SERVER_MODE is not set to Prod."
+if [ "$ENVIRONMENT" != "Prod" ]; then
+  echo "Skipping PostgreSQL check as ENVIRONMENT is not set to Prod."
   if [ ! -d "data/backup" ]; then
     mkdir -p data/backup
   fi
@@ -28,7 +28,7 @@ else
 fi
 
 # Make sure the migrations directories and __init__.py files exist
-for dir in userauth core forum gamification tracking edumaterials telehealth; do
+for dir in accounts core forum gamification tracking edumaterials telehealth; do
     mkdir -p apps/$dir/migrations && touch apps/$dir/migrations/__init__.py
 done
 
@@ -42,4 +42,4 @@ python manage.py customcreatesuperuser
 # Collect static files
 python manage.py collectstatic --no-post-process --no-input --upload-unhashed-files
 
-celery -A backend beat -l info --detach && celery -A backend worker -l info --detach && gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --env DJANGO_CONFIGURATION=DevConfig
+celery -A store beat -l info --detach && celery -A store worker -l info --detach && gunicorn store.wsgi:application --bind 0.0.0.0:8000 --env DJANGO_CONFIGURATION=DevConfig

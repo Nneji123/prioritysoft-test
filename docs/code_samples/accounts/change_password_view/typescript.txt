@@ -1,0 +1,30 @@
+// Replace 'https://<your_base_url>' with your actual base URL
+const baseUrl: string = "https://<your_base_url>";
+const url: string = `${baseUrl}/api/v1/auth/password/change/`;
+
+// Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token
+const headers: { [key: string]: string } = {
+  "Accept": "application/json",
+  "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`, // Replace with actual token
+  "Content-Type": "application/json",
+  "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+};
+
+const data: { new_password1: string; new_password2: string } = {
+  new_password1: "string", // Replace with your new password
+  new_password2: "string", // Replace with your new password (must match new_password1)
+};
+
+fetch(url, {
+  method: 'POST',
+  headers: headers,
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  // Handle the response data here
+  console.log(data);
+})
+.catch(error => {
+  console.error(error);
+});
