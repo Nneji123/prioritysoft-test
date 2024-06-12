@@ -45,7 +45,7 @@ jobs:
           fi
       - name: Run Tests
         run: |
-          DJANGO_SETTINGS_MODULE=store.setttings.development pytest tests  
+          DJANGO_SETTINGS_MODULE=store.settings.development pytest tests  
         env:
           REDIS_URI: redis://redis:6379/0
           POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
