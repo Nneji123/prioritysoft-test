@@ -1,6 +1,8 @@
 import sys
 import os
 
+import pytest
+
 pytest_plugins = ('celery.contrib.pytest', )
 
 @pytest.fixture(scope='session')
