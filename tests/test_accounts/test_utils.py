@@ -11,4 +11,4 @@ def test_valid_four_digit_numbers(value):
 def test_invalid_four_digit_numbers(value):
     with pytest.raises(ValidationError) as exc_info:
         validate_four_digit_number(value)
-    assert str(exc_info.value) == f"{value} is not a 4-digit number"
+    assert str(exc_info.value) == f"['{value} is not a 4-digit number']"
