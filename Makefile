@@ -28,13 +28,9 @@ install:
 migrate:
 	$(MANAGE) migrate
 
-# Create a superuser
-createsuperuser:
-	$(MANAGE) createsuperuser
-
 # Run the Django development server
 runserver:
-	$(MANAGE) runserver
+	./scripts/deploy.sh
 
 # Run tests
 test:
