@@ -8,6 +8,6 @@ from .tasks import send_new_supplier_notification
 
 
 @receiver(post_save, sender=Supplier)
-def comment_notification(sender, instance, created, **kwargs):
+def supplier_notification(sender, instance, created, **kwargs):
     if created:
         send_new_supplier_notification.delay(supplier_id=instance.id)
