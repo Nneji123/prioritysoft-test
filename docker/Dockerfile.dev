@@ -5,11 +5,7 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
-
-# NOTE: LATER MODIFY THE DOCKER BUILD TO INSTALL A VERSION OF POSTGRES THAT'S COMPATIBLE WITH THE SERVER
-
-
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     netcat \
