@@ -35,15 +35,7 @@ RUN sed -i "s/raise RuntimeError(\"populate() isn't reentrant\")/self.app_config
 
 # Copy the entrypoint script
 COPY scripts/entrypoint.sh /app/scripts/entrypoint.sh
-RUN chmod +x /app/scripts/entrypoint.sh
-
-LABEL maintainer="info@fundusai.com"
-LABEL org.label-schema.schema-version="1.0"
-LABEL org.label-schema.name="FundusAI API"
-LABEL org.label-schema.description="FundusAI offers an artificial intelligence diagnostic device for Diabetic Retinopathy, allowing doctors to diagnose more patients in less time to prevent blindness in diabetic patients."
-LABEL org.label-schema.url="https://fundusai.com"
-LABEL org.label-schema.vcs-url="https://github.com/fundusai"
-LABEL org.label-schema.vendor="FundusAI"
+RUN chmod +x /app/scripts/entrypoint.sh
 
 EXPOSE 8000
 
