@@ -37,6 +37,7 @@ def item(db):
 # Test ItemViewSet
 @pytest.mark.django_db
 def test_list_items(api_client, item):
+    api_client.force_authenticate(user=employee_user)
     response = api_client.get('/items/')
     assert response.status_code == status.HTTP_200_OK
     assert response.json()['message'] == "Items retrieved successfully"
@@ -81,6 +82,7 @@ def test_delete_item(api_client, employee_user, item):
 # Employee users can only read suppliers
 @pytest.mark.django_db
 def test_list_suppliers(api_client, supplier):
+    api_client.force_authenticate(user=employee_user)
     response = api_client.get('/suppliers/')
     assert response.status_code == status.HTTP_200_OK
     assert response.json()['message'] == "Suppliers retrieved successfully"
@@ -97,6 +99,7 @@ def test_create_supplier_permission_denied(api_client, employee_user):
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 def test_retrieve_supplier(api_client, supplier):
+    api_client.force_authenticate(user=employee_user)
     response = api_client.get(f'/suppliers/{supplier.id}/')
     assert response.status_code == status.HTTP_200_OK
     assert response.json()['message'] == "Supplier retrieved successfully"
