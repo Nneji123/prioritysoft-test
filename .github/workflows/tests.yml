@@ -12,7 +12,10 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_USERNAME: myuser
+          POSTGRES_DATABASE_NAME: database
+          
         ports:
           - "5432:5432"
       redis:
@@ -43,3 +46,7 @@ jobs:
       - name: Run Tests
         run: |
           pytest tests  
+        env:
+          REDIS_URI: redis://redis:6379/0
+          POSTGRES_URI: postgresql://myuser:mypassword@postgres:5432/database
+          ENVIRONMENT: Dev
