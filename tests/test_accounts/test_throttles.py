@@ -15,7 +15,7 @@ class TestPasswordResetThrottle:
     
     def test_throttle_authenticated_user(self, user):
         factory = APIRequestFactory()
-        request = factory.post("/password-reset/")
+        request = factory.post("/password/reset/")
         request.user = user
 
         throttle = PasswordResetThrottle()
@@ -32,7 +32,7 @@ class TestPasswordResetThrottle:
 
     def test_throttle_anonymous_user(self):
         factory = APIRequestFactory()
-        request = factory.post("/password-reset/")
+        request = factory.post("/password/reset/")
         request.user = User()
         throttle = PasswordResetThrottle()
 
@@ -56,7 +56,7 @@ class TestPasswordChangeThrottle:
     
     def test_throttle_authenticated_user(self, user):
         factory = APIRequestFactory()
-        request = factory.post("/password-change/")
+        request = factory.post("/password/change/")
         request.user = user
 
         throttle = PasswordChangeThrottle()
@@ -73,7 +73,7 @@ class TestPasswordChangeThrottle:
     
     def test_throttle_anonymous_user(self):
         factory = APIRequestFactory()
-        request = factory.post("/password-change/")
+        request = factory.post("/password/change/")
         request.user = User()
         throttle = PasswordChangeThrottle()
 
