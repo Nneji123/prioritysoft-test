@@ -89,6 +89,7 @@ The **Inventory** app handles the management of items and suppliers:
 - Docker
 - Docker Compose
 - Git
+- Python 3.8+ 
 
 ### Setup
 
