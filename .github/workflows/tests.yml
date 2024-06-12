@@ -40,7 +40,7 @@ jobs:
       - name: Copy .env.sample (if it exists) and add to secrets
         run: |
           if [ -f ".env.sample" ]; then
-            cp .github/workflows/.env.tests .env
+            cp -R .github/workflows/.env.tests .env
             echo ".env" >> .gitignore
           fi
       - name: Run Tests
