@@ -1,5 +1,4 @@
 import dj_database_url
-from celery.schedules import crontab
 
 from .base import *
 
@@ -11,11 +10,11 @@ INSTALLED_APPS = INSTALLED_APPS + [
     "debug_toolbar",
 ]
 
+# TODO: Add Middleware
+
 SECRET_KEY = os.environ.get("DEV_SECRET_KEY")
 
 DEBUG = True
-
-# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ["*"]
 
