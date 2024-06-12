@@ -1,5 +1,3 @@
-# accounts/tests/test_throttles.py
-
 import pytest
 from rest_framework.test import APIRequestFactory
 from django.contrib.auth import get_user_model
