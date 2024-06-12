@@ -41,19 +41,6 @@ ADMIN_URL_PATH = os.environ.get("ADMIN_URL_PATH")
 
 SITE_ID = 2
 
-MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "core.middlewares.DisableCSRFMiddleware",  # change in production
-       "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
-
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
