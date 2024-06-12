@@ -2,7 +2,7 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import Client
-from apps.inventory.models import Supplier, Item
+from inventory.models import Supplier, Item
 
 @pytest.fixture
 def admin_user(db):
