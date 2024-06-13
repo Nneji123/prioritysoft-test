@@ -1,4 +1,9 @@
-# inventory/utils.py
+"""
+utils.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from rest_framework.response import Response
 

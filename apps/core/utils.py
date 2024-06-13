@@ -1,4 +1,9 @@
-# core/utils.py
+"""
+utils.py file for core app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 import os
 

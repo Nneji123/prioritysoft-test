@@ -1,4 +1,9 @@
-# accounts/views.py
+"""
+views.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from dj_rest_auth.app_settings import api_settings
 from dj_rest_auth.models import get_token_model

@@ -1,4 +1,9 @@
-# accounts/tasks.py
+"""
+tasks.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from celery import shared_task
 from django.conf import settings

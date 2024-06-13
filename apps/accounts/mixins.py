@@ -1,4 +1,9 @@
-# accounts/mixins.py
+"""
+mixins.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from rest_framework import status
 from rest_framework.exceptions import ErrorDetail

@@ -1,4 +1,9 @@
-# accounts/urls.py
+"""
+urls.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from dj_rest_auth.jwt_auth import get_refresh_view
 from django.urls import path

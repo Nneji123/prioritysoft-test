@@ -1,4 +1,9 @@
-# accounts/admin.py
+"""
+admin.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from django.contrib import admin
 

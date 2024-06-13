@@ -1,3 +1,10 @@
+"""
+populatedb.py file for commands app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
+
 from django.apps import apps
 from django.core.management.base import BaseCommand
 from django_seed import Seed

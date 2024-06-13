@@ -1,3 +1,10 @@
+"""
+models.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
+
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 

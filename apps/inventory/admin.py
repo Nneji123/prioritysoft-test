@@ -1,4 +1,9 @@
-# inventory/admin.py
+"""
+admin.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model

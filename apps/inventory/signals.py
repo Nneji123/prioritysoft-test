@@ -1,4 +1,9 @@
-# inventory/signals.py
+"""
+signals.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver

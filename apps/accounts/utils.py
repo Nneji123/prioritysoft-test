@@ -1,4 +1,9 @@
-# accounts/utils.py
+"""
+utils.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from django.core.exceptions import ValidationError
 

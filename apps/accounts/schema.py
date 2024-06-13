@@ -1,4 +1,9 @@
-# accounts/schema.py
+"""
+schema.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from drf_spectacular.utils import (
     OpenApiExample,

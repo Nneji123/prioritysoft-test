@@ -1,4 +1,9 @@
-# inventory/tasks.py
+"""
+tasks.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from datetime import datetime
 

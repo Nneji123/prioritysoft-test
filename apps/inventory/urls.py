@@ -1,4 +1,9 @@
-# inventory/urls.py
+"""
+urls.py file for inventory app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter

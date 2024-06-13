@@ -1,4 +1,9 @@
-# accounts/serializers.py
+"""
+serializers.py file for accounts app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
 
 import random
 from datetime import timedelta

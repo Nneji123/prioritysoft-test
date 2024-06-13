@@ -1,3 +1,10 @@
+"""
+customcreatesuperuser.py file for commands app.
+
+Author(s): Ifeanyi Nneji
+Date: 06/13/2024
+"""
+
 # accounts/management/commands/customcreatesuperuser.py
 
 import os
