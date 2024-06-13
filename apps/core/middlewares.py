@@ -1,3 +1,5 @@
+# core/middlewares.py
+
 from django.utils.deprecation import MiddlewareMixin
 
 

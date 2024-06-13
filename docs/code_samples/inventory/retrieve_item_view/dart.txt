@@ -1,0 +1,21 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+const baseUrl = 'https://<your-base-url>/items/'; // Replace with your actual base URL
+const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Replace with your access token
+const itemId = 1;  // Replace with the actual item ID
+
+String url = '$baseUrl$itemId/';  // Construct the complete URL with item ID
+
+Map<String, String> headers = {
+  'accept': 'application/json',
+  'Authorization': 'Bearer $accessToken',
+};
+
+Future<http.Response> response = http.get(Uri.parse(url), headers: headers);
+
+response.then((value) => {
+  print(value.body);
+}).catchError((error) => {
+  print(error);
+});

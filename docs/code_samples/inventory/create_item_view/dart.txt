@@ -1,0 +1,29 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+const baseUrl = 'https://<your-base-url>/items/'; // Replace with your actual base URL
+const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Replace with your access token
+
+Map<String, dynamic> data = {
+  'name': 'New Item',
+  'description': 'A description of the new item',
+  'price': '29.99',
+  'suppliers': [1, 2],
+};
+
+String jsonData = jsonEncode(data);
+
+Map<String, String> headers = {
+  'accept': 'application/json',
+  'Authorization': 'Bearer $accessToken',
+  'Content-Type': 'application/json',
+  'X-CSRFTOKEN': 'aGhDBsP4oLk6ubOtkPKUg8ODSi8Bdf4S2DGZAn5PYngd654L10v99lEMqLPb2yOJS', // Replace if needed
+};
+
+Future<http.Response> response = http.post(Uri.parse(baseUrl), headers: headers, body: jsonData);
+
+response.then((value) => {
+  print(value.body);
+}).catchError((error) => {
+  print(error);
+});

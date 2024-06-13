@@ -1,0 +1,33 @@
+import axios from 'axios';
+
+const baseUrl: string = 'https://<your-base-url>/items/'; // Replace with your actual base URL
+const accessToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Replace with your access token
+
+interface Item {
+  name: string;
+  description: string;
+  price: string;
+  suppliers: number[];
+}
+
+const data: Item = {
+  name: "New Item",
+  description: "A description of the new item",
+  price: "29.99",
+  suppliers: [1, 2],
+};
+
+const headers = {
+  'accept': 'application/json',
+  'Authorization': `Bearer ${accessToken}`,
+  'Content-Type': 'application/json',
+  'X-CSRFTOKEN': 'aGhDBsP4oLk6ubOtkPKUg8ODSi8Bdf4S2DGZAn5PYngd654L10v9lEMqLPb2yOJS', // Replace if needed
+};
+
+axios.post<Item>(baseUrl, data, { headers })
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });

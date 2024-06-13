@@ -48,3 +48,36 @@ class CustomResponseMixin:
         extract_error_messages(errors)
 
         return "; ".join(error_messages)
+
+    def get_error_response(self, errors, response_code=400, message=None):
+        error_messages = []
+
+        def extract_error_messages(errors):
+            if isinstance(errors, list):
+                for error in errors:
+                    if isinstance(error, dict):
+                        extract_error_messages(error)
+                    else:
+                        error_messages.append(str(error))
+            elif isinstance(errors, dict):
+                for field, error_detail in errors.items():
+                    if isinstance(error_detail, list):
+                        for detail in error_detail:
+                            if isinstance(detail, ErrorDetail):
+                                error_messages.append(detail)
+                            else:
+                                error_messages.append(detail)
+                    else:
+                        error_messages.append(error_detail)
+            else:
+                error_messages.append(str(errors))
+
+        extract_error_messages(errors)
+
+        # Use custom message if provided, otherwise join extracted messages
+        final_message = message if message else "; ".join(error_messages)
+
+        return Response(
+            {"responseCode": response_code, "message": final_message, "data": {}},
+            status=response_code,
+        )

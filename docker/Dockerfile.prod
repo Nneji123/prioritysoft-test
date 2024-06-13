@@ -2,8 +2,8 @@ FROM python:3.8.13-slim-bullseye
 
 WORKDIR /app
 
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
+
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && \
@@ -18,6 +18,7 @@ RUN apt-get update && \
 RUN pip install --upgrade setuptools
 
 ADD --chmod=655 https://astral.sh/uv/install.sh /install.sh
+
 RUN /install.sh && rm /install.sh
 
 ADD docker/requirements.production.txt /app/requirements.txt
@@ -28,10 +29,10 @@ ADD . /app
 
 RUN sed -i "s/raise RuntimeError(\"populate() isn't reentrant\")/self.app_configs = {}/g" /usr/local/lib/python3.8/site-packages/django/apps/registry.py
 
-# Copy the entrypoint script
 COPY scripts/deploy.sh /app/scripts/deploy.sh
+
 RUN chmod +x /app/scripts/deploy.sh
 
 EXPOSE 8000
 
-ENTRYPOINT ["/app/scripts/deploy.sh"]
+CMD ["/app/scripts/deploy.sh"]

@@ -8,6 +8,8 @@ logs/
 *.so
 staticfiles/
 .env
+*.db-shm
+*.db-wal
 *.db
 # Distribution / packaging
 .Python

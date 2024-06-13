@@ -29,7 +29,6 @@ login_schema = extend_schema_view(
                     OpenApiExample(
                         name="LoginSuccessfulExample",
                         value={
-                            # TODO: MODIFY RESPONSE
                             "responseCode": 200,
                             "message": "Login Successful",
                             "data": {

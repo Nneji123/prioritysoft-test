@@ -1,0 +1,28 @@
+import requests
+
+baseUrl = 'https://<your-base-url>/items/'  # Replace with your actual base URL
+accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'  # Replace with your access token
+
+data = {
+    'name': 'New Item',
+    'description': 'A description of the new item',
+    'price': '29.99',
+    'suppliers': [1, 2],
+}
+
+headers = {
+    'accept': 'application/json',
+    'Authorization': f'Bearer {accessToken}',
+    'Content-Type': 'application/json',
+    'X-CSRFTOKEN': 'aGhDBsP4oLk6ubOtkPKUg8ODSi8Bdf4S2DGZAn5PYngd654L10v9lEMqLPb2yOJS',  # Replace if needed
+}
+
+response = requests.post(baseUrl, headers=headers, json=data)
+
+if response.status_code == 200:
+    # Request successful
+    print(response.json())  # Print the response data
+else:
+    # Handle error
+    print(f"Error: {response.status_code}")
+    print(response.text)

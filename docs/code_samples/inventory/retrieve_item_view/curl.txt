@@ -1,0 +1,4 @@
+curl -X 'GET' \
+  '{BASE_URL_HERE}/items/1/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIU...

@@ -1,0 +1,1638 @@
+openapi: 3.0.3
+info:
+  title: PriorityStore API
+  version: 1.0.0
+  description: PriorityStore API is a RestAPI for managing the inventory and suppliers
+    of PriorityStore.
+paths:
+  /auth/auth/login/:
+    post:
+      operationId: auth_auth_login_create
+      description: Log in an existing user.
+      summary: Login
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomLogin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomLogin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomLogin'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthMessage'
+              examples:
+                LoginSuccessfulExample:
+                  value:
+                    responseCode: 200
+                    message: Login Successful
+                    data:
+                      access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                      refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                      user:
+                        pk: '1'
+                        email: ifeanyinneji777@gmail.com
+                        first_name: ''
+                        last_name: ''
+          description: Login Successful
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                AccountsError400Example:
+                  value:
+                    responseCode: 400
+                    message: Unable to log in with provided credentials.
+                    data: {}
+                  summary: accountsError400Example
+          description: Bad request
+      x-code-samples:
+      - lang: typescript
+        label: Typescript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl: string = "https://<your_base_url>";
+          const url: string = `${baseUrl}/api/v1/auth/login/`;
+
+          const headers: { [key: string]: string } = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const body: string = JSON.stringify({
+            email: "ifeanyinneji777@gmail.com",
+            password: "testpassword123",
+          });
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: body,
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+      - lang: javascript
+        label: Javascript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          const url = `${baseUrl}/api/v1/auth/login/`;
+
+          const headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const body = JSON.stringify({
+            email: "ifeanyinneji777@gmail.com",
+            password: "testpassword123",
+          });
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: body,
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: python
+        label: Python
+        source: |
+          import requests
+
+          # Replace 'https://<your_base_url>' with your actual base URL
+          base_url = "https://<your_base_url>"
+          url = f"{base_url}/api/v1/auth/login/"
+
+          headers = {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          }
+
+          data = {"email": "ifeanyinneji777@gmail.com", "password": "testpassword123"}
+
+          response = requests.post(url, headers=headers, json=data)
+
+          # Handle the response here
+          print(response.text)
+      - lang: dart
+        label: Dart
+        source: |
+          import 'package:http/http.dart' as http;
+
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          final url = Uri.parse("$baseUrl/api/v1/auth/login/");
+
+          final headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          final body = jsonEncode({"email": "ifeanyinneji777@gmail.com", "password": "testpassword123"});
+
+          Future<http.Response> makeRequest() async {
+            final response = await http.post(url, headers: headers, body: body);
+            // Handle the response here
+            print(response.body);
+            return response;
+          }
+      - lang: curl
+        label: Curl
+        source: |
+          curl -X 'POST' \
+            '{BASE_URL_HERE}/api/v1/auth/login/' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+            -d '{
+            "email": "ifeanyinneji777@gmail.com",
+            "password": "testpassword123"
+          }'
+  /auth/auth/password/change/:
+    post:
+      operationId: auth_auth_password_change_create
+      description: Change the password of the authenticated user.
+      summary: Change Password
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordChange'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthMessage'
+              examples:
+                PasswordChangeSuccessfulExample:
+                  value:
+                    responseCode: 200
+                    message: Password changed successfully.
+                    data: {}
+          description: Password changed successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                PasswordChangeError400Example:
+                  value:
+                    responseCode: 400
+                    message: Invalid password. Please try again.
+                    data: {}
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                PasswordChangeError401Example:
+                  value:
+                    responseCode: 401
+                    message: Authentication credentials were not provided.
+                    data: {}
+          description: Unauthorized
+      x-code-samples:
+      - lang: typescript
+        label: Typescript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl: string = "https://<your_base_url>";
+          const url: string = `${baseUrl}/api/v1/auth/password/change/`;
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token
+          const headers: { [key: string]: string } = {
+            "Accept": "application/json",
+            "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`, // Replace with actual token
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data: { new_password1: string; new_password2: string } = {
+            new_password1: "string", // Replace with your new password
+            new_password2: "string", // Replace with your new password (must match new_password1)
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: javascript
+        label: Javascript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          const url = `${baseUrl}/api/v1/auth/password/change/`;
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token
+          const headers = {
+            "Accept": "application/json",
+            "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`,
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data = {
+            new_password1: "string",
+            new_password2: "string",
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: python
+        label: Python
+        source: |
+          import requests
+
+          # Replace 'https://<your_base_url>' with your actual base URL
+          base_url = "https://<your_base_url>"
+          url = f"{base_url}/api/v1/auth/password/change/"
+
+          # Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token
+          headers = {
+              "Accept": "application/json",
+              "Authorization": "Bearer YOUR_PLACEHOLDER_BEARER_TOKEN",
+              "Content-Type": "application/json",
+              "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          }
+
+          data = {"new_password1": "string", "new_password2": "string"}
+
+          response = requests.post(url, headers=headers, json=data)
+
+          # Handle the response here
+          print(response.text)
+      - lang: dart
+        label: Dart
+        source: |
+          import 'package:http/http.dart' as http;
+
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          final url = Uri.parse("$baseUrl/api/v1/auth/password/change/");
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token
+          final headers = {
+            "Accept": "application/json",
+            "Authorization": "Bearer YOUR_PLACEHOLDER_BEARER_TOKEN",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          final body = jsonEncode({"new_password1": "string", "new_password2": "string"});
+
+          Future<http.Response> makeRequest() async {
+            final response = await http.post(url, headers: headers, body: body);
+            // Handle the response here
+            print(response.body);
+            return response;
+          }
+      - lang: curl
+        label: Curl
+        source: |
+          curl -X 'POST' \
+            '{BASE_URL_HERE}/api/v1/auth/password/change/' \
+            -H 'accept: application/json' \
+            -H 'Authorization: Bearer TOKEN_HERE' \
+            -H 'Content-Type: application/json' \
+            -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+            -d '{
+            "new_password1": "string",
+            "new_password2": "string"
+          }'
+  /auth/auth/password/reset/:
+    post:
+      operationId: auth_auth_password_reset_create
+      description: Request a password reset email.
+      summary: Reset Password
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordReset'
+            examples:
+              PasswordResetRequestExample:
+                value:
+                  email: user@example.com
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordReset'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthMessage'
+              examples:
+                PasswordResetSuccessExample:
+                  value:
+                    responseCode: 200
+                    message: Password reset email sent successfully.
+                    data: {}
+          description: Password reset email sent successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                PasswordResetError400Example:
+                  value:
+                    responseCode: 400
+                    message: Email address not found.
+                    data: {}
+          description: Bad request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                ServerErrorExample:
+                  value:
+                    responseCode: 500
+                    message: Internal server error.
+                    data: {}
+          description: Internal server error
+      x-code-samples:
+      - lang: typescript
+        label: Typescript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl: string = "https://<your_base_url>";
+          const url: string = `${baseUrl}/api/v1/auth/password/reset/`;
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token (might not be required)
+          const headers: { [key: string]: string } = {
+            "Accept": "application/json",
+            "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`, // Might not be needed
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data: { email: string } = {
+            email: "user@example.com", // Replace with your actual email
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: javascript
+        label: Javascript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          const url = `${baseUrl}/api/v1/auth/password/reset/`;
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token (might not be required)
+          const headers = {
+            "Accept": "application/json",
+            "Authorization": `Bearer YOUR_PLACEHOLDER_BEARER_TOKEN`,  # Might not be needed
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data = {
+            email: "user@example.com",  # Replace with your actual email
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: python
+        label: Python
+        source: |
+          import requests
+
+          # Replace 'https://<your_base_url>' with your actual base URL
+          base_url = "https://<your_base_url>"
+          url = f"{base_url}/api/v1/auth/password/reset/"
+
+          # Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token (might not be required)
+          headers = {
+              "Accept": "application/json",
+              "Authorization": "Bearer YOUR_PLACEHOLDER_BEARER_TOKEN",  # Might not be needed
+              "Content-Type": "application/json",
+              "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          }
+
+          data = {"email": "user@example.com"}  # Replace with your actual email
+
+          response = requests.post(url, headers=headers, json=data)
+
+          # Handle the response here
+          print(response.text)
+      - lang: dart
+        label: Dart
+        source: |
+          import 'package:http/http.dart' as http;
+
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          final url = Uri.parse("$baseUrl/api/v1/auth/password/reset/");
+
+          // Replace 'YOUR_PLACEHOLDER_BEARER_TOKEN' with your actual token (might not be required)
+          final headers = {
+            "Accept": "application/json",
+            "Authorization": "Bearer YOUR_PLACEHOLDER_BEARER_TOKEN",  # Might not be needed
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          final body = jsonEncode({"email": "user@example.com"});  # Replace with your email
+
+          Future<http.Response> makeRequest() async {
+            final response = await http.post(url, headers: headers, body: body);
+            // Handle the response here
+            print(response.body);
+            return response;
+          }
+      - lang: curl
+        label: Curl
+        source: |
+          curl -X 'POST' \
+            '{BASE_URL_HERE}/api/v1/auth/password/reset/' \
+            -H 'accept: application/json' \
+            -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3OTQ1MTU4LCJpYXQiOjE3MTc5MDkxNTgsImp0aSI6ImMxNzBjOWJhMDFmYzQxMzA4NTJkY2VkM2U5M2NlYTY2IiwidXNlcl9pZCI6InVzZXJpZF8wMHBtbjhidmp6N21lOHlxIn0.udsMkMYyCDXEcMyR8vYjgdXPBTRWxSAwV6m7HtClKDA' \
+            -H 'Content-Type: application/json' \
+            -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+            -d '{
+            "email": "user@example.com"
+          }'
+  /auth/auth/password/reset/confirm/:
+    post:
+      operationId: auth_auth_password_reset_confirm_create
+      description: Confirm the password reset with a new password.
+      summary: Confirm Password Reset
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordResetConfirm'
+            examples:
+              ConfirmPasswordResetExample:
+                value:
+                  email: user@example.com
+                  code: 1234
+                  new_password1: newpassword
+                  new_password2: newpassword
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomPasswordResetConfirm'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthMessage'
+              examples:
+                ConfirmPasswordResetSuccessExample:
+                  value:
+                    responseCode: 200
+                    message: Password reset confirmed.
+                    data: {}
+          description: Password reset confirmed.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                ConfirmPasswordResetError400Example:
+                  value:
+                    responseCode: 400
+                    message: Invalid code or email address.
+                    data: {}
+          description: Bad request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthError'
+              examples:
+                ServerErrorExample:
+                  value:
+                    responseCode: 500
+                    message: Internal server error.
+                    data: {}
+          description: Internal server error
+      x-code-samples:
+      - lang: typescript
+        label: Typescript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl: string = "https://<your_base_url>";
+          const url: string = `${baseUrl}/api/v1/auth/password/reset/confirm/`;
+
+          const headers: { [key: string]: string } = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data: { email: string; code: number; new_password1: string; new_password2: string }
+      - lang: javascript
+        label: Javascript
+        source: |
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          const url = `${baseUrl}/api/v1/auth/password/reset/confirm/`;
+
+          const headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          const data = {
+            email: "user@example.com",
+            code: 1234,
+            new_password1: "string",
+            new_password2: "string",
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response data here
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      - lang: python
+        label: Python
+        source: |
+          import requests
+
+          # Replace 'https://<your_base_url>' with your actual base URL
+          base_url = "https://<your_base_url>"
+          url = f"{base_url}/api/v1/auth/password/reset/confirm/"
+
+          headers = {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          }
+
+          data = {
+              "email": "user@example.com",
+              "code": 1234,
+              "new_password1": "string",
+              "new_password2": "string",
+          }
+
+          response = requests.post(url, headers=headers, json=data)
+
+          # Handle the response here
+          print(response.text)
+      - lang: dart
+        label: Dart
+        source: |
+          import 'package:http/http.dart' as http;
+
+          // Replace 'https://<your_base_url>' with your actual base URL
+          const baseUrl = "https://<your_base_url>";
+          final url = Uri.parse("$baseUrl/api/v1/auth/password/reset/confirm/");
+
+          final headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFTOKEN": "ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto",
+          };
+
+          final body = jsonEncode({
+            "email": "user@example.com",
+            "code": 1234,
+            "new_password1": "string",
+            "new_password2": "string",
+          });
+
+          Future<http.Response> makeRequest() async {
+            final response = await http.post(url, headers: headers, body: body);
+            // Handle the response here
+            print(response.body);
+            return response;
+          }
+      - lang: curl
+        label: Curl
+        source: |
+          curl -X 'POST' \
+            '{BASE_URL_HERE}/api/v1/auth/password/reset/confirm/' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'X-CSRFTOKEN: ZMgEkJ3gR36pAu7hfplkmTIo6H6IgnQVi9Qwbxd8DNfFHS9wMYWzZZ5rvuG8wCto' \
+            -d '{
+            "email": "user@example.com",
+            "code": 1234,
+            "new_password1": "string",
+            "new_password2": "string"
+          }'
+  /auth/auth/token/refresh/:
+    post:
+      operationId: auth_auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /auth/auth/token/verify/:
+    post:
+      operationId: auth_auth_token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+  /items/:
+    get:
+      operationId: items_list
+      description: Retrieve a list of inventory items.
+      summary: List Items
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Number of results to return per page.
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Name filter
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: The initial index from which to return the results.
+      - in: query
+        name: ordering
+        schema:
+          type: string
+        description: Ordering fields
+      - in: query
+        name: price
+        schema:
+          type: number
+          format: double
+        description: Price filter
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search in name and description
+      tags:
+      - items
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBaseResponseList'
+              examples:
+                ItemsListExample:
+                  value:
+                    count: 123
+                    next: http://api.example.org/accounts/?offset=400&limit=100
+                    previous: http://api.example.org/accounts/?offset=200&limit=100
+                    results:
+                    - responseCode: 200
+                      message: Items retrieved successfully
+                      data:
+                      - id: 1
+                        name: Item 1
+                        description: Description 1
+                        price: '10.00'
+                        date_added: '2024-06-10T00:00:00Z'
+                        suppliers:
+                        - 1
+                        - 2
+                      - id: 2
+                        name: Item 2
+                        description: Description 2
+                        price: '20.00'
+                        date_added: '2024-06-11T00:00:00Z'
+                        suppliers:
+                        - 2
+                        - 3
+          description: ''
+    post:
+      operationId: items_create
+      description: Create a new inventory item.
+      summary: Create Item
+      tags:
+      - items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+            examples:
+              CreateItemExample:
+                value:
+                  name: New Item
+                  description: A description of the new item
+                  price: '29.99'
+                  suppliers:
+                  - 1
+                  - 2
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Item'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemCreateSuccess:
+                  value:
+                    responseCode: 201
+                    message: Item created successfully
+                    data:
+                      id: 1
+                      name: New Item
+                      description: A description of the new item
+                      price: '29.99'
+                      date_added: '2024-06-13T00:00:00Z'
+                      suppliers:
+                      - 1
+                      - 2
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemCreateError:
+                  value:
+                    responseCode: 400
+                    message: Validation error
+                    data: {}
+          description: ''
+  /items/{id}/:
+    get:
+      operationId: items_retrieve
+      description: Retrieve a single inventory item by ID.
+      summary: Retrieve Item
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this item.
+        required: true
+      tags:
+      - items
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemRetrieveExample:
+                  value:
+                    responseCode: 200
+                    message: Item retrieved successfully
+                    data:
+                      id: 1
+                      name: Item 1
+                      description: Description 1
+                      price: '10.00'
+                      date_added: '2024-06-10T00:00:00Z'
+                      suppliers:
+                      - 1
+                      - 2
+          description: ''
+    put:
+      operationId: items_update
+      description: Update an existing inventory item.
+      summary: Update Item
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this item.
+        required: true
+      tags:
+      - items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Item'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemUpdateSuccess:
+                  value:
+                    responseCode: 200
+                    message: Item updated successfully
+                    data:
+                      id: 1
+                      name: Updated Item
+                      description: This is an updated item.
+                      price: '20.00'
+                      date_added: '2023-06-10T00:00:00Z'
+                      suppliers:
+                      - 1
+                      - 3
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemUpdateError:
+                  value:
+                    responseCode: 400
+                    message: Validation error
+                    data: {}
+          description: ''
+    patch:
+      operationId: items_partial_update
+      description: Update an existing inventory item.
+      summary: Partial Update Item
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this item.
+        required: true
+      tags:
+      - items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedItem'
+            examples:
+              PatchItemExample:
+                value:
+                  name: Updated Item
+                  description: An updated description of the item
+                  price: '35.99'
+                  suppliers:
+                  - 1
+                  - 3
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedItem'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedItem'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemUpdatedExample:
+                  value:
+                    responseCode: 200
+                    message: Item updated successfully
+                    data:
+                      id: 1
+                      name: Updated Item
+                      description: An updated description of the item
+                      price: '35.99'
+                      date_added: '2024-06-12T00:00:00Z'
+                      suppliers:
+                      - 1
+                      - 3
+          description: Item updated successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemUpdateErrorExample:
+                  value:
+                    responseCode: 400
+                    message: Validation error
+                    data:
+                      detail: Error details here
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemNotFoundExample:
+                  value:
+                    responseCode: 404
+                    message: Item not found
+                    data: {}
+          description: ''
+    delete:
+      operationId: items_destroy
+      description: Delete an inventory item.
+      summary: Delete Item
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this item.
+        required: true
+      tags:
+      - items
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemDeleteSuccess:
+                  value:
+                    responseCode: 204
+                    message: Item deleted successfully
+                    data: {}
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                ItemDeleteError:
+                  value:
+                    responseCode: 404
+                    message: Item not found
+                    data: {}
+          description: ''
+  /suppliers/:
+    get:
+      operationId: suppliers_list
+      description: Retrieve a list of suppliers.
+      summary: List Suppliers
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Number of results to return per page.
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Name filter
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: The initial index from which to return the results.
+      - in: query
+        name: ordering
+        schema:
+          type: string
+        description: Ordering fields
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search in name, email address, and phone number
+      tags:
+      - suppliers
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBaseResponseList'
+          description: ''
+    post:
+      operationId: suppliers_create
+      description: Create a new supplier. Only admins can perform this action.
+      summary: Create Supplier
+      tags:
+      - suppliers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+            examples:
+              CreateSupplierExample:
+                value:
+                  name: New Supplier
+                  email_address: supplier@example.com
+                  phone_number: '+2348056042384'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierCreateSuccess:
+                  value:
+                    responseCode: 200
+                    message: Supplier created successfully
+                    data:
+                      id: 1
+                      name: New Supplier
+                      email_address: supplier@example.com
+                      phone_number: '+2348056042384'
+                      date_added: '2024-06-10T00:00:00Z'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierCreateError:
+                  value:
+                    responseCode: 400
+                    message: Validation error
+                    data: {}
+          description: ''
+  /suppliers/{id}/:
+    get:
+      operationId: suppliers_retrieve
+      description: Retrieve a single supplier by ID.
+      summary: Retrieve Supplier
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this supplier.
+        required: true
+      tags:
+      - suppliers
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+          description: ''
+    put:
+      operationId: suppliers_update
+      description: Update an existing supplier. Only admins can perform this action.
+      summary: Update Supplier
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this supplier.
+        required: true
+      tags:
+      - suppliers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+            examples:
+              UpdateSupplierExample:
+                value:
+                  name: Updated Supplier
+                  email_address: updatedsupplier@example.com
+                  phone_number: '+2348056042384'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierUpdateSuccess:
+                  value:
+                    responseCode: 200
+                    message: Supplier information updated successfully
+                    data:
+                      id: 1
+                      name: Updated Supplier
+                      email_address: updatedsupplier@example.com
+                      phone_number: '+2348056042384'
+                      date_added: '2023-06-10T00:00:00Z'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierUpdateError:
+                  value:
+                    responseCode: 400
+                    message: Validation error
+                    data: {}
+          description: ''
+    patch:
+      operationId: suppliers_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this supplier.
+        required: true
+      tags:
+      - suppliers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+          description: ''
+    delete:
+      operationId: suppliers_destroy
+      description: Delete a supplier. Only admins can perform this action.
+      summary: Delete Supplier
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this supplier.
+        required: true
+      tags:
+      - suppliers
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierDeleteSuccess:
+                  value:
+                    responseCode: 204
+                    message: Supplier deleted successfully
+                    data: {}
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                SupplierDeleteError:
+                  value:
+                    responseCode: 404
+                    message: Supplier not found
+                    data: {}
+          description: ''
+components:
+  schemas:
+    BaseResponse:
+      type: object
+      properties:
+        responseCode:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: {}
+      required:
+      - data
+      - message
+      - responseCode
+    CustomLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - email
+      - password
+    CustomPasswordChange:
+      type: object
+      description: Custom password change serializer
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
+    CustomPasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    CustomPasswordResetConfirm:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        code:
+          type: integer
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - code
+      - email
+      - new_password1
+      - new_password2
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        suppliers:
+          type: array
+          items:
+            type: integer
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - date_added
+      - description
+      - id
+      - name
+      - price
+    PaginatedBaseResponseList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseResponse'
+    PatchedItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        suppliers:
+          type: array
+          items:
+            type: integer
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+    PatchedSupplier:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        email_address:
+          type: string
+          format: email
+          maxLength: 254
+        phone_number:
+          type: string
+          maxLength: 128
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        email_address:
+          type: string
+          format: email
+          maxLength: 254
+        phone_number:
+          type: string
+          maxLength: 128
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+      required:
+      - date_added
+      - email_address
+      - id
+      - name
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+      - token
+    UserAuthError:
+      type: object
+      properties:
+        responseCode:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: {}
+      required:
+      - data
+      - message
+      - responseCode
+    UserAuthMessage:
+      type: object
+      properties:
+        responseCode:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: {}
+      required:
+      - data
+      - message
+      - responseCode
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

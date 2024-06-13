@@ -144,7 +144,37 @@ The **Inventory** app handles the management of items and suppliers:
 - **Serializers**: Transforms inventory data for API responses.
 - **Permissions**: Defines access control logic for item and supplier operations.
 
+## UI Screenshots
 
+<details>
+<summary>Swagger UI</summary>
+<img src=".github/images/Screenshot%20(694).png" alt="Swagger UI">
+<img src=".github/images/Screenshot%20(695).png" alt="Swagger UI2">
+</details>
+
+<details>
+<summary>Redoc UI</summary>
+<img src=".github/images/Screenshot%20(698).png" alt="Redoc UI">
+<img src=".github/images/Screenshot%20(699).png" alt="Redoc UI">
+</details>
+
+### Mailpit UI
+
+<details>
+<summary>Mailpit UI</summary>
+<img src=".github/images/Screenshot%20(696).png" alt="Mailpit UI">
+<img src=".github/images/Screenshot%20(697).png" alt="Mailpit UI">
+</details>
+
+### Custom Admin Interface
+
+This project includes a custom admin interface using Django admin interface package. You can access the admin panel at `/admin/`.
+
+<details>
+<summary>Admin UI</summary>
+<img src=".github/images/Screenshot%20(700).png" alt="Admin UI">
+<img src=".github/images/Screenshot%20(701).png" alt="Admin UI">
+</details>
 
 ## Getting Started
 
@@ -267,32 +297,8 @@ This project includes extensive API documentation generated with drf-spectacular
 - Swagger UI: `/swagger/`
 - Redoc: `/docs/`
 
-### UI Screenshots
+The OpenAPI `yaml` spec file is located in the `docs` directory.
 
-<details>
-<summary>Swagger UI</summary>
-<img src=".github/images/Screenshot%20(694).png" alt="Swagger UI">
-<img src=".github/images/Screenshot%20(695).png" alt="Swagger UI2">
-</details>
-
-<details>
-<summary>Redoc UI</summary>
-<img src=".github/images/Screenshot%20(698).png" alt="Redoc UI">
-<img src=".github/images/Screenshot%20(699).png" alt="Redoc UI">
-</details>
-
-## Mailpit UI
-
-<details>
-<summary>Mailpit UI</summary>
-<img src=".github/images/Screenshot%20(696).png" alt="Mailpit UI">
-<img src=".github/images/Screenshot%20(697).png" alt="Mailpit UI">
-</details>
-
-
-## Custom Admin Interface
-
-This project includes a custom admin interface using Django admin interface package. You can access the admin panel at `/admin/`.
 
 ## Static Files
 

@@ -56,12 +56,74 @@ item_schema = extend_schema_view(
                 type=OpenApiTypes.STR,
             ),
         ],
-        responses={200: OpenApiResponse(response=BaseResponseSerializer)},
+        responses={
+            200: OpenApiResponse(
+                response=BaseResponseSerializer,
+                examples=[
+                    OpenApiExample(
+                        name="ItemsListExample",
+                        value={
+                            "responseCode": 200,
+                            "message": "Items retrieved successfully",
+                            "data": [
+                                {
+                                    "id": 1,
+                                    "name": "Item 1",
+                                    "description": "Description 1",
+                                    "price": "10.00",
+                                    "date_added": "2024-06-10T00:00:00Z",
+                                    "suppliers": [1, 2],
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Item 2",
+                                    "description": "Description 2",
+                                    "price": "20.00",
+                                    "date_added": "2024-06-11T00:00:00Z",
+                                    "suppliers": [2, 3],
+                                },
+                            ],
+                        },
+                    )
+                ],
+            )
+        },
+        extensions={
+            "x-code-samples": get_code_samples(
+                app_name="inventory", view_name="list_item_view"
+            ),
+        },
     ),
     retrieve=extend_schema(
         summary="Retrieve Item",
         description="Retrieve a single inventory item by ID.",
-        responses={200: OpenApiResponse(response=BaseResponseSerializer)},
+        responses={
+            200: OpenApiResponse(
+                response=BaseResponseSerializer,
+                examples=[
+                    OpenApiExample(
+                        name="ItemRetrieveExample",
+                        value={
+                            "responseCode": 200,
+                            "message": "Item retrieved successfully",
+                            "data": {
+                                "id": 1,
+                                "name": "Item 1",
+                                "description": "Description 1",
+                                "price": "10.00",
+                                "date_added": "2024-06-10T00:00:00Z",
+                                "suppliers": [1, 2],
+                            },
+                        },
+                    )
+                ],
+            )
+        },
+        extensions={
+            "x-code-samples": get_code_samples(
+                app_name="inventory", view_name="retrieve_item_view"
+            ),
+        },
     ),
     create=extend_schema(
         summary="Create Item",
@@ -74,6 +136,7 @@ item_schema = extend_schema_view(
                     "name": "New Item",
                     "description": "A description of the new item",
                     "price": "29.99",
+                    "suppliers": [1, 2],
                 },
                 request_only=True,
             ),
@@ -89,10 +152,11 @@ item_schema = extend_schema_view(
                             "message": "Item created successfully",
                             "data": {
                                 "id": 1,
-                                "name": "Example Item",
-                                "description": "This is an example item.",
-                                "price": "10.00",
-                                "date_added": "2024-06-10T00:00:00Z",
+                                "name": "New Item",
+                                "description": "A description of the new item",
+                                "price": "29.99",
+                                "date_added": "2024-06-13T00:00:00Z",
+                                "suppliers": [1, 2],
                             },
                         },
                     )
@@ -110,6 +174,82 @@ item_schema = extend_schema_view(
                         },
                     )
                 ],
+            ),
+        },
+        extensions={
+            "x-code-samples": get_code_samples(
+                app_name="inventory", view_name="create_item_view"
+            ),
+        },
+    ),
+    partial_update=extend_schema(
+        summary="Partial Update Item",
+        description="Update an existing inventory item.",
+        request=ItemSerializer,
+        examples=[
+            OpenApiExample(
+                name="PatchItemExample",
+                value={
+                    "name": "Updated Item",
+                    "description": "An updated description of the item",
+                    "price": "35.99",
+                    "suppliers": [1, 3],
+                },
+                request_only=True,
+            ),
+        ],
+        responses={
+            status.HTTP_200_OK: OpenApiResponse(
+                response=BaseResponseSerializer,
+                description="Item updated successfully",
+                examples=[
+                    OpenApiExample(
+                        name="ItemUpdatedExample",
+                        value={
+                            "responseCode": 200,
+                            "message": "Item updated successfully",
+                            "data": {
+                                "id": 1,
+                                "name": "Updated Item",
+                                "description": "An updated description of the item",
+                                "price": "35.99",
+                                "date_added": "2024-06-12T00:00:00Z",
+                                "suppliers": [1, 3],
+                            },
+                        },
+                    )
+                ],
+            ),
+            status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                response=BaseResponseSerializer,
+                examples=[
+                    OpenApiExample(
+                        name="ItemUpdateErrorExample",
+                        value={
+                            "responseCode": 400,
+                            "message": "Validation error",
+                            "data": {"detail": "Error details here"},
+                        },
+                    )
+                ],
+            ),
+            status.HTTP_404_NOT_FOUND: OpenApiResponse(
+                response=BaseResponseSerializer,
+                examples=[
+                    OpenApiExample(
+                        name="ItemNotFoundExample",
+                        value={
+                            "responseCode": 404,
+                            "message": "Item not found",
+                            "data": {},
+                        },
+                    )
+                ],
+            ),
+        },
+        extensions={
+            "x-code-samples": get_code_samples(
+                app_name="inventory", view_name="update_item_view"
             ),
         },
     ),
@@ -132,6 +272,7 @@ item_schema = extend_schema_view(
                                 "description": "This is an updated item.",
                                 "price": "20.00",
                                 "date_added": "2023-06-10T00:00:00Z",
+                                "suppliers": [1, 3],
                             },
                         },
                     )
@@ -181,6 +322,11 @@ item_schema = extend_schema_view(
                         },
                     )
                 ],
+            ),
+        },
+        extensions={
+            "x-code-samples": get_code_samples(
+                app_name="inventory", view_name="delete_item_view"
             ),
         },
     ),
