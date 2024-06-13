@@ -1,4 +1,4 @@
-name: Codecov
+name: codecov
 
 on:
   - push
@@ -52,6 +52,7 @@ jobs:
           ENVIRONMENT: Dev
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: Nneji123/prioritysoft-test
