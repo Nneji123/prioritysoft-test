@@ -1,7 +1,7 @@
 curl -X 'POST' \
-  'https://glorious-waffle-q5xgjv4p4g5397wq-8000.app.github.dev/items/' \
+  '{BASE_URL}/items/' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4Mjc0OTg2LCJpYXQiOjE3MTgyMzg5ODYsImp0aSI6IjUxODA1Y2Q1YmRjZDQ0NDk5MjgyZmFlZjBkMmZlN2NiIiwidXNlcl9pZCI6Mn0.QnneZGxOdIquNEm5X6cA-XnHe5s-SXYzN9U-XizhZkA' \
+  -H 'Authorization: Bearer eyJhbGciOiJIU...' \
   -H 'Content-Type: application/json' \
   -H 'X-CSRFTOKEN: aGhDBsP4oLk6ubOtkPKUg8ODSi8Bdf4S2DGZAn5PYngd654L10v9lEMqLPb2yOJS' \
   -d '{
